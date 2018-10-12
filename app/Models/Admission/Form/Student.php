@@ -63,12 +63,21 @@ class Student extends Model
 
     public function getGender()
     {
-        return self::GENDER[$this->gender];
+        if (in_array($this->gender, array_keys(self::GENDER))) {
+            return self::GENDER[$this->gender];
+        }else {
+            return "";
+        }
+
     }
 
     public function getBloodGroup()
     {
-        return self::BLOOD_GROUP[$this->blood_group];
+        if (in_array($this->blood_group, array_keys(self::BLOOD_GROUP))) {
+            return self::BLOOD_GROUP[$this->blood_group];
+        }else {
+            return "";
+        }
     }
 
     public function getStatus()

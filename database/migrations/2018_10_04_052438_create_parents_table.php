@@ -17,14 +17,14 @@ class CreateParentsTable extends Migration
             $table->increments('id');
             $table->integer('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->string('father_name');
-            $table->string('father_occupation');
+            $table->string('father_name')->nullable();
+            $table->string('father_occupation')->nullable();
             $table->string('father_contact')->nullable();
-            $table->string('father_photo');
-            $table->string('mother_name');
-            $table->string('mother_occupation');
+            $table->string('father_photo')->nullable();
+            $table->string('mother_name')->nullable();
+            $table->string('mother_occupation')->nullable();
             $table->string('mother_contact')->nullable();
-            $table->string('mother_photo');
+            $table->string('mother_photo')->nullable();
             $table->timestamps();
         });
     }

@@ -23,6 +23,11 @@
                     </div>
                 </div>
             </div>
+            @if (!count($depts))
+                <div class="text-center">
+                    <p class="text-danger"> <strong>Note:</strong> Application season are not available </p>
+                </div>
+            @endif
         </div>
     </div>
     <div hidden id="admission_form" class="card">
@@ -37,10 +42,10 @@
                 <input id="dept_id" type="text" name="department_id" value="">
                 <input hidden type="text" name="exam_season_id" value="{{ $ad?$ad->exam_season_id:'' }}">
 
-                <h3>Payment</h3>
+                {{-- <h3>Payment</h3>
                 <fieldset>
                     @include('admission_form.payment')
-                </fieldset>
+                </fieldset> --}}
 
                 <h3>Student Information</h3>
                 <fieldset>

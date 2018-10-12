@@ -37,7 +37,7 @@ $factory->define(Student::class, function (Faker $faker) {
         'dob'               => $faker->date(),
         'gender'            => $faker->numberBetween($min = 1, $max = 2),
         'photo'             => '1538654746.jpg',
-        'bload_group'       => $faker->numberBetween($min = 1, $max = 8),
+        'blood_group'       => $faker->numberBetween($min = 1, $max = 8),
         'email'             => $faker->email,
         'contact_number'    => '01700123456',
         'present_address'   => $faker->text,

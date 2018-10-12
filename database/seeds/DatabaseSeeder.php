@@ -17,14 +17,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        factory(App\User::class)->create();
+        // factory(App\User::class)->create();
 
-        // factory(Student::class,50)->create()->each(function($student)
-        // {
-        //     $student->educationalQualification()->save(factory(Parents::class)->make());
-        //     $student->educationalQualification()->save(factory(Payment::class)->make());
-        //     $student->educationalQualification()->save(factory(Guardian::class)->make());
-        //     $student->educationalQualification()->save(factory(EQ::class)->make());
-        // });
+        factory(Student::class,50)->create()->each(function($student)
+        {
+            $student->educationalQualification()->save(factory(Parents::class)->make());
+            $student->educationalQualification()->save(factory(Payment::class)->make());
+            $student->educationalQualification()->save(factory(Guardian::class)->make());
+            $student->educationalQualification()->save(factory(EQ::class)->make());
+        });
     }
 }

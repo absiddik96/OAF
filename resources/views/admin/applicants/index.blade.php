@@ -49,7 +49,7 @@
                                             <td>{{ $applicant->guardian->contact_number }}</td>
                                             <td>{{ $applicant->guardian->relationship_of_student }}</td> --}}
                                             <td>{{ $applicant->department->dept }}</td>
-                                            <td>{{ $applicant->payment->txn_id }}</td>
+                                            <td>{{ $applicant->payment?$applicant->payment->txn_id:'' }}</td>
                                             <td>{{ $applicant->reg_token }}</td>
                                             <td>{{ $applicant->getStatus() }}</td>
                                             <td>
@@ -58,9 +58,9 @@
                                                         <span class="caret"></span></button>
                                                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                                             @if ($applicant->status)
-                                                                <li role="presentation"><a href="{{route('user.deactivated', $applicant->id)}}"> Deactivate</a></li>
+                                                                <li role="presentation"><a href="{{route('applicant.unapprove', $applicant->id)}}"> Unapproved</a></li>
                                                             @else
-                                                                <li role="presentation"><a href="{{route('user.activated', $applicant->id)}}"> Activate</a></li>
+                                                                <li role="presentation"><a href="{{route('applicant.approve', $applicant->id)}}"> Approved</a></li>
                                                             @endif
                                                             <li role="presentation" class="divider"></li>
                                                             <li role="presentation"><a href="{{route('applicant.show', $applicant->id)}}"> Show</a></li>

@@ -17,16 +17,16 @@ class CreateEducationalQualificationsTable extends Migration
             $table->increments('id');
             $table->integer('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->string('ssc_board');
-            $table->string('ssc_name_of_institute');
-            $table->string('ssc_passing_year');
-            $table->string('ssc_gpa');
-            $table->string('ssc_marksheet');
-            $table->string('hsc_board');
-            $table->string('hsc_name_of_institute');
-            $table->string('hsc_passing_year');
-            $table->string('hsc_gpa');
-            $table->string('hsc_marksheet');
+            $table->string('ssc_board')->nullable();
+            $table->string('ssc_name_of_institute')->nullable();
+            $table->string('ssc_passing_year')->nullable();
+            $table->string('ssc_gpa')->nullable();
+            $table->string('ssc_marksheet')->nullable();
+            $table->string('hsc_board')->nullable();
+            $table->string('hsc_name_of_institute')->nullable();
+            $table->string('hsc_passing_year')->nullable();
+            $table->string('hsc_gpa')->nullable();
+            $table->string('hsc_marksheet')->nullable();
             $table->timestamps();
         });
     }

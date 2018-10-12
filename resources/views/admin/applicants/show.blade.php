@@ -136,7 +136,9 @@
                                     <td>{{ $applicant->educationalQualification->ssc_passing_year}}</td>
                                     <td>{{ $applicant->educationalQualification->ssc_gpa}}</td>
                                     <td>
-                                        <a target="_blank" href="{{ $applicant->educationalQualification->ssc_marksheet }}">SSC Marksheet</a>
+                                        @if ($applicant->educationalQualification->getOriginal('ssc_marksheet') != '')
+                                            <a target="_blank" href="{{ $applicant->educationalQualification->ssc_marksheet }}">HSC Marksheet</a>
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr>
@@ -146,7 +148,9 @@
                                     <td>{{ $applicant->educationalQualification->hsc_passing_year }}</td>
                                     <td>{{ $applicant->educationalQualification->hsc_gpa }}</td>
                                     <td>
-                                        <a target="_blank" href="{{ $applicant->educationalQualification->hsc_marksheet }}">HSC Marksheet</a>
+                                        @if ($applicant->educationalQualification->getOriginal('hsc_marksheet') != '')
+                                            <a target="_blank" href="{{ $applicant->educationalQualification->hsc_marksheet }}">HSC Marksheet</a>
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr>
@@ -155,18 +159,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        {{-- <div id="aniimated-thumbnials" class="list-unstyled row clearfix">
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                                <a href="{{ $applicant->educationalQualification->ssc_marksheet }}" data-sub-html="Demo Description">
-                                    <img width="100%" class="img-responsive thumbnail" src="{{ $applicant->educationalQualification->ssc_marksheet }}">
-                                </a>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                                <a href="{{ $applicant->educationalQualification->hsc_marksheet }}" data-sub-html="Demo Description">
-                                    <img width="100%" class="img-responsive thumbnail" src="{{ $applicant->educationalQualification->hsc_marksheet }}">
-                                </a>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -182,17 +174,17 @@
                             <tr>
                                 <td width="150px">payment_method</td>
                                 <td width="1px">:</td>
-                                <td>{{ $applicant->payment->getPaymentMethod() }}</td>
+                                <td>{{ $applicant->payment ? $applicant->payment->getPaymentMethod() : '' }}</td>
                             </tr>
                             <tr>
                                 <td width="150px">transaction_number</td>
                                 <td width="1px">:</td>
-                                <td>{{ $applicant->payment->transaction_number }}</td>
+                                <td>{{ $applicant->payment ? $applicant->payment->transaction_number : '' }}</td>
                             </tr>
                             <tr>
                                 <td width="150px">txn_id</td>
                                 <td width="1px">:</td>
-                                <td>{{ $applicant->payment->txn_id }}</td>
+                                <td>{{ $applicant->payment ? $applicant->payment->txn_id : '' }}</td>
                             </tr>
                         </table>
                     </div>

@@ -33,11 +33,18 @@ class AdmissionFormsController extends Controller
      */
     public function create()
     {
+        $department = [];
+        $ad = AD::where('status',AD::UNACCOMPLISHED)->orderBy('deadline','desc')->first();
+
+        if ($ad) {
+            $department = Department::orderBy('dept')->pluck('dept','id')->all();
+        }
+
         return view('welcome')
-                ->with('ad', AD::where('status',AD::UNACCOMPLISHED)->orderBy('deadline','desc')->first())
+                ->with('ad', $ad)
                 ->with('blood_group', Student::BLOOD_GROUP)
                 ->with('reg_token', $this->registration_token())
-                ->with('depts', Department::orderBy('dept')->pluck('dept','id')->all());
+                ->with('depts', $department);
     }
 
     public function registration_token()
@@ -62,8 +69,8 @@ class AdmissionFormsController extends Controller
         $student            = Student::create($input);
 
         // Payment
-        $input['student_id']    = $student->id;
-        Payment::create($input);
+        // $input['student_id']    = $student->id;
+        // Payment::create($input);
 
         // Educational Qualification
         $input['student_id']    = $student->id;

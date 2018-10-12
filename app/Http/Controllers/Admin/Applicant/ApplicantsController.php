@@ -13,8 +13,14 @@ class ApplicantsController extends Controller
     public function index()
     {
         $ad = AD::where('status',AD::UNACCOMPLISHED)->orderBy('deadline','desc')->first();
+        if ($ad) {
+            $applicants = Student::where('exam_season_id',$ad->exam_season_id)->get();
+        }else {
+            Session::flash('info','No unaccomplished exam season found');
+            return redirect()->back();
+        }
         return view('admin.applicants.index')
-                ->with('applicants', Student::where('exam_season_id',$ad->exam_season_id)->get());
+                ->with('applicants', $applicants);
     }
 
     public function show($applicant_id)

@@ -14,6 +14,10 @@ class Payment extends Model
 
     public function getPaymentMethod()
     {
-        return self::PAYMENT_METHOD[$this->payment_method];
+        if (in_array($this->payment_method, array_keys(self::PAYMENT_METHOD))) {
+            return self::PAYMENT_METHOD[$this->payment_method];
+        }else {
+            return "";
+        }
     }
 }

@@ -16,19 +16,19 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->date('dob');
-            $table->tinyInteger('gender');
-            $table->string('photo');
-            $table->integer('blood_group')->unsigned();
-            $table->string('email');
+            $table->tinyInteger('gender')->nullable();
+            $table->string('photo')->nullable();
+            $table->integer('blood_group')->unsigned()->nullable();
+            $table->string('email')->nullable();
             $table->string('contact_number');
-            $table->text('present_address');
-            $table->text('permanent_address');
-            $table->string('nationality');
-            $table->string('religion');
-            $table->string('signature');
-            $table->string('reg_token');
+            $table->text('present_address')->nullable();
+            $table->text('permanent_address')->nullable();
+            $table->string('nationality')->nullable();
+            $table->string('religion')->nullable();
+            $table->string('signature')->nullable();
+            $table->string('reg_token')->nullable();
             $table->integer('department_id')->unsigned();
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->integer('exam_season_id')->unsigned();
