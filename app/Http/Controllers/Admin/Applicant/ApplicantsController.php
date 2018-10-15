@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Applicant;
 
+use PDF;
 use Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -76,6 +77,30 @@ class ApplicantsController extends Controller
             'status' => $is_approved,
         ])->get();
         return view('admin.archive.show')
-                ->with('applicants', $applicants);
+                ->with('season_id', $season_id)
+                ->with('applicants', $applicants)
+                ->with('approved', $approve);
+    }
+
+    public function archiveListPDF($season_id,$approve)
+    {
+        if ($approve == 'approved') {
+            $is_approved = '1';
+        }elseif ($approve == 'unapproved') {
+            $is_approved = '0';
+        }
+
+        $applicants = Student::select('students.id','name','dept','txn_id','students.status','reg_token')
+                                ->where('students.exam_season_id' , $season_id)
+                                ->where('students.status', $is_approved)
+                                ->join('payments','payments.student_id','=','students.id')
+                                ->join('departments','departments.id','=','students.department_id')
+                                ->get();
+
+        $name = 'approve_list_' . time();
+        $pdf = PDF::loadView('admin.archive.pdf', ['applicants'=>$applicants])->setPaper('a4', 'portrait');
+        return $pdf->download($name.'.pdf');
+
+        // return view('admin.archive.pdf')->with('applicants', $applicants);
     }
 }

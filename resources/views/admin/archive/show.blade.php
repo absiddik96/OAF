@@ -57,6 +57,9 @@
                             </tbody>
                         </table>
                     </div>
+                    @if ($approved =='approved')
+                        <a class="btn btn-xs btn-primary" href="{!! route('archive.list.pdf',['season_id'=>$season_id,'approve'=>$approved]) !!}">PDF</a>
+                    @endif
                 </div>
             </div>
         </div>

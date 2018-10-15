@@ -52,6 +52,7 @@ Route::group(['prefix' => 'admin','middleware'=>['auth','isAdmin']], function() 
 
     Route::get('archive', 'Admin\Applicant\ApplicantsController@archiveSeasonList')->name('archive.season.list');
     Route::get('archive/{season_id}/{approve}', 'Admin\Applicant\ApplicantsController@archiveList')->name('archive.list');
+    Route::get('archive/{season_id}/{approve}/pdf', 'Admin\Applicant\ApplicantsController@archiveListPDF')->name('archive.list.pdf');
 
 });
 
