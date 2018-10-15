@@ -56,4 +56,26 @@ class ApplicantsController extends Controller
         return redirect()->back();
 
     }
+
+    public function archiveSeasonList()
+    {
+        return view('admin.archive.index')
+                ->with('seasons', AD::where('status', AD::ACCOMPLISHED)->orderBy('deadline','desc')->get());
+    }
+
+    public function archiveList($season_id,$approve)
+    {
+        if ($approve == 'approved') {
+            $is_approved = '1';
+        }elseif ($approve == 'unapproved') {
+            $is_approved = '0';
+        }
+
+        $applicants = Student::where([
+            'exam_season_id' => $season_id,
+            'status' => $is_approved,
+        ])->get();
+        return view('admin.archive.show')
+                ->with('applicants', $applicants);
+    }
 }

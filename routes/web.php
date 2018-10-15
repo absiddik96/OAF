@@ -50,6 +50,9 @@ Route::group(['prefix' => 'admin','middleware'=>['auth','isAdmin']], function() 
     Route::get('applicant/{id}/approve', 'Admin\Applicant\ApplicantsController@makeApproved')->name('applicant.approve');
     Route::get('applicant/{id}/unapprove', 'Admin\Applicant\ApplicantsController@makeUnapproved')->name('applicant.unapprove');
 
+    Route::get('archive', 'Admin\Applicant\ApplicantsController@archiveSeasonList')->name('archive.season.list');
+    Route::get('archive/{season_id}/{approve}', 'Admin\Applicant\ApplicantsController@archiveList')->name('archive.list');
+
 });
 
 Route::group(['middleware'=>'auth'], function() {

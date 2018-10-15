@@ -158,6 +158,13 @@
                             <span>Applicants</span>
                         </a>
                     </li>
+
+                    <li class="">
+                        <a href="{!! route('archive.season.list') !!}">
+                            <i class="material-icons">supervisor_account</i>
+                            <span>Archive</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- #Menu -->
