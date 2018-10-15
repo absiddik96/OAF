@@ -161,7 +161,7 @@
 
                     <li class="">
                         <a href="{!! route('archive.season.list') !!}">
-                            <i class="material-icons">supervisor_account</i>
+                            <i class="material-icons">archive</i>
                             <span>Archive</span>
                         </a>
                     </li>
