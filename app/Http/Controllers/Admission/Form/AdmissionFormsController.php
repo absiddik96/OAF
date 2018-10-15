@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admission\form;
 
+use PDF;
 use Session;
 use Illuminate\Http\Request;
 use App\Models\Admin\Department;
@@ -16,21 +17,6 @@ use App\Models\Admission\Form\EducationalQualification as EQ;
 
 class AdmissionFormsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $department = [];
@@ -40,7 +26,7 @@ class AdmissionFormsController extends Controller
             $department = Department::orderBy('dept')->pluck('dept','id')->all();
         }
 
-        return view('welcome')
+        return view('admission_form.form')
                 ->with('ad', $ad)
                 ->with('blood_group', Student::BLOOD_GROUP)
                 ->with('reg_token', $this->registration_token())
@@ -52,12 +38,6 @@ class AdmissionFormsController extends Controller
         return rand(1000,9999).chr(rand(65,90)).rand(10,99).chr(rand(65,90)).chr(rand(65,90)).rand(100,900);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(AdmissionFormCreateRequest $request)
     {
         $input = $request->all();
@@ -99,7 +79,7 @@ class AdmissionFormsController extends Controller
         if ($guardian->save()) {
             Session::flash('success','Application submitted successfully');
         }
-        return redirect()->back();
+        return redirect()->route('payment.view',['reg_token'=>$input['reg_token']]);
     }
 
     public function imageUpload($image,$path)
@@ -112,48 +92,62 @@ class AdmissionFormsController extends Controller
         return $new_name;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function paymentView(Request $request)
     {
-        //
+        return view('admission_form.payment')
+                ->with('reg_token', $request->reg_token);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function paymentStore(Request $request)
     {
-        //
+        $this->validate($request,[
+            'registration_token' => 'required',
+            'payment_method'     => 'required|numeric',
+            'transaction_number' => 'required|min:8',
+            'txn_id'             => 'required|min:3',
+        ]);
+        $input = $request->all();
+        $student = Student::select('id')->where('reg_token',$request->registration_token)->first();
+        $input['student_id'] = $student->id;
+
+        if (Payment::create($input)) {
+            Session::flash('success','Payment submitted successfully');
+        }
+        return redirect()->route('applicant.details',['reg_token'=>$request->registration_token]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function submittedFormView(Request $request)
     {
-        //
+        $student = Student::where('reg_token',$request->reg_token)->first();
+        if (!$student) {
+            Session::flash('info','No student found');
+            return redirect()->back();
+        }
+        return view('admission_form.submitted_form')
+                ->with('student', $student);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function formPDF(Request $request)
     {
-        //
+        $student = Student::where('reg_token',$request->reg_token)->first();
+
+        $name = 'admission_form_' . time();
+        $pdf = PDF::loadView('admission_form.form_pdf', ['student'=>$student])->setPaper('a4', 'portrait');
+        return $pdf->download($name.'.pdf');
+
+        // return view('admission_form.form_pdf')
+        //         ->with('student', $student);
+    }
+
+    public function admitCardPDF(Request $request)
+    {
+        $student = Student::where('reg_token',$request->reg_token)->first();
+
+        $name = 'admission_form_' . time();
+        $pdf = PDF::loadView('admission_form.admit_card_pdf', ['student'=>$student])->setPaper('a4', 'portrait');
+        return $pdf->download($name.'.pdf');
+
+        // return view('admission_form.admit_card_pdf')
+        //         ->with('student', $student);
     }
 }

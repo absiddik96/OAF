@@ -93,6 +93,11 @@ class Student extends Model
         return $this->belongsTo('App\Models\Admin\Department');
     }
 
+    public function examSeason()
+    {
+        return $this->belongsTo('App\Models\Admin\ExamSeason');
+    }
+
     public function getPhotoAttribute($value='')
     {
         return asset('uploads/students/photo/'.$value);

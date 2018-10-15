@@ -166,23 +166,23 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
-                    <h2>Parents</h2>
+                    <h2>Payment</h2>
                 </div>
                 <div class="body">
                     <div class="">
                         <table class="table no-border no-padding">
                             <tr>
-                                <td width="150px">payment_method</td>
+                                <td width="150px">Payment Method</td>
                                 <td width="1px">:</td>
                                 <td>{{ $applicant->payment ? $applicant->payment->getPaymentMethod() : '' }}</td>
                             </tr>
                             <tr>
-                                <td width="150px">transaction_number</td>
+                                <td width="150px">Transaction Number</td>
                                 <td width="1px">:</td>
                                 <td>{{ $applicant->payment ? $applicant->payment->transaction_number : '' }}</td>
                             </tr>
                             <tr>
-                                <td width="150px">txn_id</td>
+                                <td width="150px">TXN ID</td>
                                 <td width="1px">:</td>
                                 <td>{{ $applicant->payment ? $applicant->payment->txn_id : '' }}</td>
                             </tr>

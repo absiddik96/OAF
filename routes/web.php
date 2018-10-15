@@ -15,6 +15,17 @@ use App\Models\Admin\Department;
 Route::get('/', 'Admission\Form\AdmissionFormsController@create')->name('home');
 Route::post('admission-form', 'Admission\Form\AdmissionFormsController@store')->name('admission-form.store');
 
+// Payment
+Route::get('payment/', 'Admission\Form\AdmissionFormsController@paymentView')->name('payment.view');
+Route::post('payment', 'Admission\Form\AdmissionFormsController@paymentStore')->name('payment.store');
+
+// Submitted Form
+Route::get('applicant-details', 'Admission\Form\AdmissionFormsController@submittedFormView')->name('applicant.details');
+
+Route::get('applicant-details/pdf', 'Admission\Form\AdmissionFormsController@formPDF')->name('applicant.details.pdf');
+
+Route::get('admit-card/pdf', 'Admission\Form\AdmissionFormsController@admitCardPDF')->name('admit-card.pdf');
+
 // Authentication Routes...
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
 $this->post('login', 'Auth\LoginController@login');

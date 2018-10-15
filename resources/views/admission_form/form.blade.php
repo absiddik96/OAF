@@ -76,6 +76,9 @@
             {!! Form::close() !!}
         </div>
     </div>
+    {{-- <div class="text-center">
+        <img width="100%" src="{{ asset('images/gb.jpg') }}" alt="">
+    </div> --}}
 @endsection
 @section('scripts')
     <script>

@@ -87,6 +87,14 @@
                     <li class="pull-right">
                         <a href="{!! route('home') !!}">Registration</a>
                     </li>
+
+                    <li class="pull-right">
+                        <a href="{!! route('payment.view') !!}">Payment</a>
+                    </li>
+
+                    <li class="pull-right">
+                        <a data-toggle="modal" data-target="#defaultModal">Applicant</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -96,6 +104,26 @@
     <br>
     <br>
     <section>
+        {{-- applicant --}}
+        <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="defaultModalLabel">Applicant</h4>
+                    </div>
+                    <form class="" action="{!! route('applicant.details') !!}" method="get">
+                        <div class="modal-body">
+                            <input placeholder="Enter Registration Token" class="form-control" type="text" name="reg_token" value="" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-link waves-effect">Search</button>
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="">
             <div class="col-md-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -104,6 +132,10 @@
             </div>
         </div>
     </section>
+
+    <script src="{!! asset('admin/plugins/bootstrap-notify/bootstrap-notify.js') !!}"></script>
+    <script src="{!! asset('admin/js/pages/ui/modals.js') !!}"></script>
+
     <!-- Jquery Core Js -->
     <script src="{!! asset('admin/plugins/jquery/jquery.min.js') !!}"></script>
 
@@ -169,25 +201,6 @@
     </script>
     @yield('scripts')
 
-    <!-- Jquery CountTo Plugin Js -->
-    {{-- <script src="{!! asset('admin/plugins/jquery-countto/jquery.countTo.js') !!}"></script> --}}
-
-    <!-- Morris Plugin Js -->
-    {{-- <script src="{!! asset('admin/plugins/raphael/raphael.min.js') !!}"></script>
-    <script src="{!! asset('admin/plugins/morrisjs/morris.js') !!}"></script> --}}
-
-    <!-- ChartJs -->
-    {{-- <script src="{!! asset('admin/plugins/chartjs/Chart.bundle.js') !!}"></script> --}}
-
-    <!-- Flot Charts Plugin Js -->
-    {{-- <script src="{!! asset('admin/plugins/flot-charts/jquery.flot.js') !!}"></script>
-    <script src="{!! asset('admin/plugins/flot-charts/jquery.flot.resize.js') !!}"></script>
-    <script src="{!! asset('admin/plugins/flot-charts/jquery.flot.pie.js') !!}"></script>
-    <script src="{!! asset('admin/plugins/flot-charts/jquery.flot.categories.js') !!}"></script>
-    <script src="{!! asset('admin/plugins/flot-charts/jquery.flot.time.js') !!}"></script> --}}
-
-    <!-- Sparkline Chart Plugin Js -->
-    {{-- <script src="{!! asset('admin/plugins/jquery-sparkline/jquery.sparkline.js') !!}"></script> --}}
 </body>
 
 </html>
