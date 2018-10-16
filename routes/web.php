@@ -26,6 +26,9 @@ Route::get('applicant-details/pdf', 'Admission\Form\AdmissionFormsController@for
 
 Route::get('admit-card/pdf', 'Admission\Form\AdmissionFormsController@admitCardPDF')->name('admit-card.pdf');
 
+// notice
+Route::get('notice/{exam_season_id}/pdf', 'Admission\Notice\NoticeController@approvedAppicantsListPDF')->name('notice.pdf');
+
 // Authentication Routes...
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
 $this->post('login', 'Auth\LoginController@login');
@@ -44,6 +47,8 @@ Route::group(['prefix' => 'admin','middleware'=>['auth','isAdmin']], function() 
     Route::resource('exam_seasons', 'Admin\ExamSeason\ExamSeasonsController')->except('show');
     Route::resource('application-deadlines', 'Admin\ApplicationDeadlines\ApplicationDeadlinesController')->except('show');
     Route::get('application-deadlines/{id}/status', 'Admin\ApplicationDeadlines\ApplicationDeadlinesController@status')->name('application-deadlines.status');
+
+    Route::get('application-deadlines/{id}/publish', 'Admin\ApplicationDeadlines\ApplicationDeadlinesController@isPublished')->name('application-deadlines.publish');
 
     Route::get('applicants', 'Admin\Applicant\ApplicantsController@index')->name('applicants.list');
     Route::get('applicant/{id}', 'Admin\Applicant\ApplicantsController@show')->name('applicant.show');

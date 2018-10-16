@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin\Applicant;
 use PDF;
 use Session;
 use Illuminate\Http\Request;
+use App\Models\Admin\ExamSeason;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\ApplicationDeadlines as AD;
 use App\Models\Admission\Form\Student;
+use App\Models\Admin\ApplicationDeadlines as AD;
 
 class ApplicantsController extends Controller
 {
@@ -90,6 +91,8 @@ class ApplicantsController extends Controller
             $is_approved = '0';
         }
 
+        $exam_season = ExamSeason::find($season_id);
+
         $applicants = Student::select('students.id','name','dept','txn_id','students.status','reg_token')
                                 ->where('students.exam_season_id' , $season_id)
                                 ->where('students.status', $is_approved)
@@ -98,7 +101,7 @@ class ApplicantsController extends Controller
                                 ->get();
 
         $name = 'approve_list_' . time();
-        $pdf = PDF::loadView('admin.archive.pdf', ['applicants'=>$applicants])->setPaper('a4', 'portrait');
+        $pdf = PDF::loadView('admin.archive.pdf', ['applicants'=>$applicants,'exam_season'=>$exam_season])->setPaper('a4', 'portrait');
         return $pdf->download($name.'.pdf');
 
         // return view('admin.archive.pdf')->with('applicants', $applicants);

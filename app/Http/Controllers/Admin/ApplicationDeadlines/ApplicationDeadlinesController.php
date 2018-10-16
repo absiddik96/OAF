@@ -127,10 +127,26 @@ class ApplicationDeadlinesController extends Controller
 
         if ($ad->status) {
             $ad->status = AD::UNACCOMPLISHED;
+            $ad->is_published = AD::UNPUBLISHED;
             Session::flash('success','Application Deadlines unaccomplished successfully');
         }else{
             $ad->status = AD::ACCOMPLISHED;
             Session::flash('success','Application Deadlines accomplished successfully');
+        }
+        $ad->save();
+        return redirect()->route('application-deadlines.index');
+    }
+
+    public function isPublished($id)
+    {
+        $ad = AD::find($id);
+
+        if ($ad->is_published) {
+            $ad->is_published = AD::UNPUBLISHED;
+            Session::flash('success','Application Deadlines unpublished successfully');
+        }else{
+            $ad->is_published = AD::PUBLISHED;
+            Session::flash('success','Application Deadlines published successfully');
         }
         $ad->save();
         return redirect()->route('application-deadlines.index');

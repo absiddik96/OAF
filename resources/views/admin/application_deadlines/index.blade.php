@@ -38,6 +38,11 @@
                                             <td>
                                                 @if ($ad->status)
                                                     <a class="btn btn-sm btn-danger" href="{{route('application-deadlines.status', $ad->id)}}"> Unaccomplished</a>
+                                                    @if ($ad->is_published)
+                                                        <a class="btn btn-sm btn-danger" href="{{route('application-deadlines.publish', $ad->id)}}"> Unpublished</a>
+                                                    @else
+                                                        <a class="btn btn-sm btn-success" href="{{route('application-deadlines.publish', $ad->id)}}"> Published</a>
+                                                    @endif
                                                 @else
                                                     <a class="btn btn-sm btn-info" href="{{route('application-deadlines.status', $ad->id)}}"> Accomplished</a>
                                                     <a class="btn btn-sm btn-primary" href="{{route('application-deadlines.edit', $ad->id)}}"> Edit</a>

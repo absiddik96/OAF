@@ -95,6 +95,42 @@
                     <li class="pull-right">
                         <a data-toggle="modal" data-target="#defaultModal">Applicant</a>
                     </li>
+
+                    <!-- Notifications -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">notifications</i>
+                            <span class="label-count">7</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">NOTIFICATIONS</li>
+                            <li class="body">
+                                <ul class="menu">
+                                    @if ($exam_seasons->count())
+                                        @foreach ($exam_seasons as $exam_season)
+                                            <li>
+                                                <a href="{!! route('notice.pdf',$exam_season->examSeason->id) !!}">
+                                                    <div class="icon-circle bg-blue-grey">
+                                                        <i class="material-icons">comment</i>
+                                                    </div>
+                                                    <div class="menu-info">
+                                                        <h4>{{ $exam_season->examSeason->exam_season }}</h4>
+                                                        <p>
+                                                            <i class="material-icons">supervisor_account</i> Approved Applicant List
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                {{-- <a href="javascript:void(0);">View All Notifications</a> --}}
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
                 </ul>
             </div>
         </div>

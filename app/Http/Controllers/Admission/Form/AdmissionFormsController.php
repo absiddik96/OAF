@@ -143,7 +143,7 @@ class AdmissionFormsController extends Controller
     {
         $student = Student::where('reg_token',$request->reg_token)->first();
 
-        $name = 'admission_form_' . time();
+        $name = 'admit_card_' . time();
         $pdf = PDF::loadView('admission_form.admit_card_pdf', ['student'=>$student])->setPaper('a4', 'portrait');
         return $pdf->download($name.'.pdf');
 
