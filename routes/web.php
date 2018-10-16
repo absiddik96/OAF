@@ -69,4 +69,13 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('password/update','Profile\ProfilesController@changePassword')->name('password.change');
     Route::put('password/update','Profile\ProfilesController@updatePassword')->name('password.update');
 
+    Route::get('dept/applicants', 'User\Applicant\ApplicantsController@index')->name('dept.applicants.list');
+    Route::get('dept/applicant/{id}', 'User\Applicant\ApplicantsController@show')->name('dept.applicant.show');
+    Route::get('dept/applicant/{id}/approve', 'User\Applicant\ApplicantsController@makeApproved')->name('dept.applicant.approve');
+    Route::get('dept/applicant/{id}/unapprove', 'User\Applicant\ApplicantsController@makeUnapproved')->name('dept.applicant.unapprove');
+
+    Route::get('dept/archive', 'User\Applicant\ApplicantsController@archiveSeasonList')->name('dept.archive.season.list');
+    Route::get('dept/archive/{season_id}/{approve}', 'User\Applicant\ApplicantsController@archiveList')->name('dept.archive.list');
+    Route::get('dept/archive/{season_id}/{approve}/pdf', 'User\Applicant\ApplicantsController@archiveListPDF')->name('dept.archive.list.pdf');
+
 });

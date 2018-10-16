@@ -123,6 +123,20 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+
+                    <li class="">
+                        <a href="{!! route('dept.applicants.list') !!}">
+                            <i class="material-icons">supervisor_account</i>
+                            <span>Applicants</span>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="{!! route('dept.archive.season.list') !!}">
+                            <i class="material-icons">archive</i>
+                            <span>Archive</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- #Menu -->
