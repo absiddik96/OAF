@@ -9,6 +9,9 @@ class ApplicationDeadlines extends Model
     const ACCOMPLISHED = true;
     const UNACCOMPLISHED = false;
 
+    const PUBLISHED = true;
+    const UNPUBLISHED = false;
+
     /**
      * Get the ExamSeason that owns the model.
      */

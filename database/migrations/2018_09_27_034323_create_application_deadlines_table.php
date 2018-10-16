@@ -20,6 +20,7 @@ class CreateApplicationDeadlinesTable extends Migration
             $table->foreign('exam_season_id')->references('id')->on('exam_seasons')->onDelete('cascade');
             $table->date('deadline');
             $table->boolean('status')->default(AD::UNACCOMPLISHED);
+            $table->boolean('is_published')->default(AD::UNPUBLISHED);
             $table->timestamps();
         });
     }
