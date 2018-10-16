@@ -100,6 +100,7 @@ class ApplicantsController extends Controller
                                 ->where('students.status', $is_approved)
                                 ->join('payments','payments.student_id','=','students.id')
                                 ->join('departments','departments.id','=','students.department_id')
+                                ->orderBy('departments.dept')
                                 ->get();
 
         $name = 'approve_list_' . time();
